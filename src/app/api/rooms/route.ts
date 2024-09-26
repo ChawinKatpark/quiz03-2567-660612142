@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async () => {
   readDB();
   const rooms = (<DB>DB).rooms;
-  let totalRooms = rooms.length;
+  const totalRooms = rooms.length;
   return NextResponse.json({
     ok: true,
     rooms: rooms,
