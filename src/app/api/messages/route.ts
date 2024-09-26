@@ -1,5 +1,5 @@
 import { DB, readDB, writeDB } from "@lib/DB";
-import { checkToken } from "@lib/checkToken";
+import { checkToken, Payload } from "@lib/checkToken";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -57,8 +57,7 @@ export const POST = async (request: NextRequest) => {
 
 export const DELETE = async (request: NextRequest) => {
   const payload = checkToken();
-
-  if (!payload) {
+  if (!payload || (<Payload>payload).role !== "SUPER_ADMIN") {
       return NextResponse.json(
         {
           ok: false,
